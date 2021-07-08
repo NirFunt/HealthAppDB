@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class DummyDB {
 
@@ -22,12 +23,29 @@ public class DummyDB {
         try (Socket socket = new Socket("localhost",3022)) {
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
-            output.println("Hi");
-            output.println("Start Sending Meals");
-            output.println("aaa,0,5,bbb");
+
+            Scanner scanner = new Scanner(System.in);
             while (true) {
+               String command = scanner.nextLine();
+
+               if (command.equals("Send")) {
+                   output.println("Start Sending Meals");
+                   for (Meal meal : listOfMeals) {
+                       String str = meal.getName() + "," + meal.getCalories() + "," + meal.getScore() + "," + meal.getDescription();
+                       System.out.println(str);
+                       output.println(str);
+                   }
+                   output.println("Finish");
+               }
+
+               if (command.equals("Exit")) {
+                   output.println("Exit");
+                   break;
+
+               }
 
             }
+
 
 
 
