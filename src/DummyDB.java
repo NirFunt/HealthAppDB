@@ -32,7 +32,6 @@ public class DummyDB {
                    output.println("Start Sending Meals");
                    for (Meal meal : listOfMeals) {
                        String str = meal.getName() + "," + meal.getCalories() + "," + meal.getScore() + "," + meal.getDescription();
-                       System.out.println(str);
                        output.println(str);
                    }
                    output.println("Finish");
